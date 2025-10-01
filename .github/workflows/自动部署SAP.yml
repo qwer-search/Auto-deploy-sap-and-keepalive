@@ -54,9 +54,9 @@ on:
           - Neo-UAE(Dubai)
           - Neo-KSA(Riyadh)
       app_name:
-        description: '应用名称（可选，留空则自动生成）'
+        description: '应用名称（可选，留空则自动生成，不可中文）'
         required: false
-        default: 'nezha哪吒'
+        default: 'nezha'
 
 jobs:
   deploy-app:
