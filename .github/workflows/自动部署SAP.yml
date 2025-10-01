@@ -9,8 +9,8 @@ on:
         default: 'nezha'
         type: choice
         options:
-          - ws直连
-          - xhttp直连
+          - nezha
+          - nezha
           - nezha
       region:
         description: '选择部署区域'
