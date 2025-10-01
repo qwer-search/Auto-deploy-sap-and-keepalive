@@ -249,14 +249,8 @@ jobs:
         echo "SPACE=$SPACE" >> $GITHUB_ENV
 
         # 使用获取的组织和空间重新登录
-        cf login -a ${{ env.CF_API }} -u "${{ secrets.EMAIL }}" -p "${{ secrets.PASSWORD }}" -o "$ORG" -s "$SPACE"
-
-    - name: Deploy application
-      run: |
-        cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m 1024M -k 4096M
-          
-        
-        
+        cf login -a ${{ env.CF_API }} -u "${{ secrets.EMAIL }}" -p "${{ secrets.PASSWORD }}" -o "$ORG" -s "$SPACE" 
+  
     - name: Set environment variables
       run: |
         # 基础环境变量
@@ -297,27 +291,7 @@ jobs:
           fi
         fi
         
-    - name: Restage application
+    - name: Deploy application
       run: |
-        cf restage ${{ env.APP_NAME }}
-
-    - name: Verify deployment
-      run: |
-        cf app ${{ env.APP_NAME }}
-        echo "Deployment completed successfully!"
-
-    - name: 详细部署信息
-      run: |
-        echo "🚀 部署完成！详细信息如下："
-        echo "区域(Region): ${{ github.event.inputs.region }}"
-        echo "组织(ORG): ${{ env.ORG }}"
-        echo "空间(SPACE): ${{ env.SPACE }}"
-        echo "应用名称(App Name): ${{ env.APP_NAME }}"
-
-        # 获取应用路由
-        ROUTE=$(cf app ${{ env.APP_NAME }} | grep "routes:" | awk '{print $2}')
-        if [ -n "$ROUTE" ]; then
-          echo "应用 URL (APP_URL): https://$ROUTE"
-        else
-          echo "⚠️ 未找到应用路由，请检查部署状态。"
-        fi
+        cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m 1024M -k 4096M
+          
