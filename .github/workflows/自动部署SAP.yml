@@ -252,9 +252,11 @@ jobs:
         cf login -a ${{ env.CF_API }} -u "${{ secrets.EMAIL }}" -p "${{ secrets.PASSWORD }}" -o "$ORG" -s "$SPACE" 
      
     - name: Deploy application
+      timeout-minutes: 0.5  # 30秒 = 0.5分钟
+      continue-on-error: true
       run: |
         cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m 1024M -k 4096M
-    
+  
     - name: Set environment variables
       run: |
         # 基础环境变量
