@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # 只允许手动触发
     inputs:
       type:
-        description: '选择部署的节点类型(随便选都一样)'
+        description: '选一个美女护身(美女相伴，幸福不断)'
         required: true
         default: '刘亦菲'
         type: choice
