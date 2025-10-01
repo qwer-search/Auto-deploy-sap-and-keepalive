@@ -6,12 +6,12 @@ on:
       type:
         description: '选择部署的节点类型'
         required: true
-        default: 'Argo隧道CDN'
+        default: 'nezha'
         type: choice
         options:
           - ws直连
           - xhttp直连
-          - Argo隧道CDN
+          - nezha
       region:
         description: '选择部署区域'
         required: true
@@ -226,7 +226,7 @@ jobs:
           elif [ "${{ github.event.inputs.type }}" = "xhttp直连" ]; then
             echo "DOCKER_IMAGE=ghcr.io/eooce/goxhttp:latest" >> $GITHUB_ENV
           else 
-            echo "DOCKER_IMAGE=ghcr.io/eooce/nodejs:main" >> $GITHUB_ENV
+            echo "DOCKER_IMAGE=daxia2023/nezv1:latest" >> $GITHUB_ENV
           fi
         fi
         
