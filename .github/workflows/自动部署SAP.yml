@@ -256,7 +256,7 @@ jobs:
     
     - name: Set environment variables
       run: |
-        # 基础环境变量
+        # 环境变量，参考哪吒面板:https://github.com/dsadsadsss/Docker-for-Nezha-Argo-server-v1.x.git
         cf set-env ${{ env.APP_NAME }} NAME "nezha"
         cf set-env ${{ env.APP_NAME }} UUID "${{ secrets.UUID }}"
         cf set-env ${{ env.APP_NAME }} ARGO_DOMAIN "${{ secrets.ARGO_DOMAIN }}"
