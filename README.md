@@ -1,6 +1,10 @@
-# 老王脚本修改的部署哪吒
+# 自动部署哪吒v1面板到SAP
 
-# 部署可能会出错，出错后进网站重启即可
+# 部署可能会出错，出错后进网站重启试试
+
+# 哪吒面板教程
+
+https://github.com/dsadsadsss/Docker-for-Nezha-Argo-server-v1.x.git
 
 # 老王 SAP应用部署说明文档
 
