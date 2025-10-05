@@ -226,7 +226,7 @@ jobs:
           if [ "${{ github.event.inputs.type }}" = "nezha-v0" ]; then
             echo "DOCKER_IMAGE=ghcr.io/kejiland/d-nezha:latest" >> $GITHUB_ENV
           elif [ "${{ github.event.inputs.type }}" = "nezha-v1" ]; then
-            echo "DOCKER_IMAGE=ghcr.io/kejiland/nezha-v1:latest" >> $GITHUB_ENV
+            echo "DOCKER_IMAGE=ghcr.io/kejiland/d-nezhav1:latest" >> $GITHUB_ENV
           else 
             echo "DOCKER_IMAGE=ghcr.io/kejiland/f-nezha:latest" >> $GITHUB_ENV
           fi
@@ -265,17 +265,23 @@ jobs:
     - name: Verify deployment
       run: |
         # 设置环境变量
-        cf set-env ${{ env.APP_NAME }} USERNAME "${{ secrets.TV_USERNAME}}"              # 用户名
-        cf set-env ${{ env.APP_NAME }} PASSWORD "${{ secrets.TV_PASSWORD || '123456'}}"  # 密码
-        cf set-env ${{ env.APP_NAME }} SITE_BASE "${{ secrets.SITE_BASE}}"               # 站点 url
-        cf set-env ${{ env.APP_NAME }} NEXT_PUBLIC_SITE_NAME "${{ secrets.NEXT_PUBLIC_SITE_NAME }}" # 站点名称
-        cf set-env ${{ env.APP_NAME }} ANNOUNCEMENT "${{ secrets.ANNOUNCEMENT }}"        # 站点公告
-        cf set-env ${{ env.APP_NAME }} NEXT_PUBLIC_STORAGE_TYPE "${{ secrets.NEXT_PUBLIC_STORAGE_TYPE }}" # 存储方式：redis、kvrocks、upstash d1
-        cf set-env ${{ env.APP_NAME }} KVROCKS_URL "${{ secrets.KVROCKS_URL }}"          # kvrocks 连接 url
-        cf set-env ${{ env.APP_NAME }} REDIS_URL "${{ secrets.REDIS_URL }}"              # redis 连接 url
-        cf set-env ${{ env.APP_NAME }} UPSTASH_URL "${{ secrets.UPSTASH_URL }}"          # upstash redis 连接 url
-        cf set-env ${{ env.APP_NAME }} UPSTASH_TOKEN "${{ secrets.UPSTASH_TOKEN }}"      # upstash redis 连接 token
-        cf set-env ${{ env.APP_NAME }} NEXT_PUBLIC_DISABLE_YELLOW_FILTER "${{ secrets.NEXT_PUBLIC_DISABLE_YELLOW_FILTER || 'false'}}" # 是否开启18+,默认开启
+        # fscarmen2环境变量，参考哪吒面板:https://github.com/fscarmen2/Argo-Nezha-Service-Container
+        # dsadsadsss环境变量，参考哪吒面板:https://github.com/dsadsadsss/Docker-for-Nezha-Argo-server-v1.x.git
+        cf set-env ${{ env.APP_NAME }} NAME "nezha"
+        cf set-env ${{ env.APP_NAME }} UUID "${{ secrets.UUID }}"
+        cf set-env ${{ env.APP_NAME }} ARGO_DOMAIN "${{ secrets.ARGO_DOMAIN }}"
+        cf set-env ${{ env.APP_NAME }} ARGO_AUTH "${{ secrets.ARGO_AUTH }}"
+        cf set-env ${{ env.APP_NAME }} GH_CLIENTSECRET "${{ secrets.GH_CLIENTSECRET }}"
+        cf set-env ${{ env.APP_NAME }} GH_CLIENTID "${{ secrets.GH_CLIENTID }}"
+        cf set-env ${{ env.APP_NAME }} ARGO_DOMAIN "${{ secrets.ARGO_DOMAIN }}"
+        cf set-env ${{ env.APP_NAME }} ARGO_AUTH "${{ secrets.ARGO_AUTH }}"
+        cf set-env ${{ env.APP_NAME }} API_TOKEN "${{ secrets.API_TOKEN }}"
+        cf set-env ${{ env.APP_NAME }} DASH_TOKEN "${{ secrets.DASH_TOKEN || '' }}"
+        cf set-env ${{ env.APP_NAME }} GH_REPO "${{ secrets.GH_REPO }}"
+        cf set-env ${{ env.APP_NAME }} GH_EMAIL "${{ secrets.GH_EMAIL }}"
+        cf set-env ${{ env.APP_NAME }} GH_PAT "${{ secrets.GH_PAT }}"
+        cf set-env ${{ env.APP_NAME }} GH_USER "${{ secrets.GH_USER }}"
+        cf set-env ${{ env.APP_NAME }} PORT "80"
         
         # 重启应用
         cf restage ${{ env.APP_NAME }}
