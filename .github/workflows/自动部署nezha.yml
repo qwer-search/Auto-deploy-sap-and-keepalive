@@ -6,7 +6,7 @@ on:
       type:
         description: '选择部署的版本(fscarmen,dsadsadsss-v0和dsadsadsss-v1)'
         required: true
-        default: 'fscarmen'
+        default: 'nezha-v1'
         type: choice
         options:
           - nezha-v0
