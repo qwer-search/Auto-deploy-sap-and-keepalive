@@ -59,7 +59,7 @@ on:
         default: ''
 
 env:
-  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/kejiland/d-nezhav1:latest' }}
+  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'docker.io/daxia2023/nezv1:latest' }}
   MEMORY: ${{ secrets.MEMORY || '512M' }}
   DISK: ${{ secrets.DISK || '1024M' }}
 
