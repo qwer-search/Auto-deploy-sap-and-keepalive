@@ -1,4 +1,4 @@
-name: 自动部署moontv到SAP
+name: 自动部署nezha到SAP
 
 on:
   workflow_dispatch:  # 只允许手动触发
