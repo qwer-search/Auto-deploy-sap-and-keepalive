@@ -1,17 +1,17 @@
-name: 自动部署nezha到SAP
+name: 自动部署 哪吒v1 SAP
 
 on:
   workflow_dispatch:  # 只允许手动触发
     inputs:
       type:
-        description: '选择部署的版本(fscarmen,dsadsadsss-v0和dsadsadsss-v1)'
+        description: '选一个美女护身(美女相伴，幸福不断)'
         required: true
-        default: 'nezha-v1'
+        default: '刘亦菲'
         type: choice
         options:
-          - nezha-v0
-          - nezha-v1
-          - fscarmen
+          - 刘亦菲
+          - 关之琳
+          - 高圆圆
       region:
         description: '选择部署区域'
         required: true
@@ -54,14 +54,9 @@ on:
           - Neo-UAE(Dubai)
           - Neo-KSA(Riyadh)
       app_name:
-        description: '应用名称(可选,留空则自动生成,被占用会部署失败)'
+        description: '应用名称（可选，留空则自动生成，不可中文）'
         required: false
-        default: ''
-
-env:
-  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/legendmeinan/nezhav1:latest' }}
-  MEMORY: ${{ secrets.MEMORY || '512M' }}
-  DISK: ${{ secrets.DISK || '1024M' }}
+        default: 'nezhav1'
 
 jobs:
   deploy-app:
@@ -87,153 +82,148 @@ jobs:
           # 免费区域
           "SG(free)")
             echo "CF_API=https://api.cf.ap21.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-freesg$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=free-sg$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "US(free)")
             echo "CF_API=https://api.cf.us10-001.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-freeus$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=free-us$RANDOM_STR" >> $GITHUB_ENV
             ;;
           # AWS 区域
           "AWS-AU(Sydney)")
             echo "CF_API=https://api.cf.ap10.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsau$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-au$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-BR(São Paulo)")
             echo "CF_API=https://api.cf.br10.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsbr$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-br$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-KR(Seoul)")
             echo "CF_API=https://api.cf.ap12.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awskr$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-kr$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-CA(Montreal)")
             echo "CF_API=https://api.cf.ca10.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsca$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-ca$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-US(VA)")
             echo "CF_API=https://api.cf.us10-001.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsusva$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-usva$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-US(OR)")
             echo "CF_API=https://api.cf.us11.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsusor$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-usor$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-EU(Frankfurt)")
             echo "CF_API=https://api.cf.eu10-005.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-waseu$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-eu$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-JP(Tokyo)")
             echo "CF_API=https://api.cf.jp10.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awsjp$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-jp$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "AWS-SG(Singapore)")
             echo "CF_API=https://api.cf.ap11.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-awssg$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=aws-sg$RANDOM_STR" >> $GITHUB_ENV
             ;;
           
           # GCP 区域
           "GCP-AU(Sydney)")
             echo "CF_API=https://api.cf.ap30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpau$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-au$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-BR(São Paulo)")
             echo "CF_API=https://api.cf.br30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpbr$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-br$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-US(IA)")
             echo "CF_API=https://api.cf.us30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpus$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-us$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-EU(Frankfurt)")
             echo "CF_API=https://api.cf.eu30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpeu$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-eu$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-JP(Osaka)")
             echo "CF_API=https://api.cf.jp30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpjpo$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-jpo$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-JP(Tokyo)")
             echo "CF_API=https://api.cf.jp31.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpjpt$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-jpt$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-IL(Tel Aviv)")
             echo "CF_API=https://api.cf.il30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpil$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-il$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-IN(Mumbai)")
             echo "CF_API=https://api.cf.in30.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpin$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-in$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "GCP-KSA(Dammam)")
             echo "CF_API=https://api.cf.sa31.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-gcpsa$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=gcp-sa$RANDOM_STR" >> $GITHUB_ENV
             ;;
           
           # Azure 区域
           "Azure-AU(Sydney)")
             echo "CF_API=https://api.cf.ap20.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azau$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-au$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-BR(São Paulo)")
             echo "CF_API=https://api.cf.br20.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azbr$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-br$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-CA(Montreal)")
             echo "CF_API=https://api.cf.ca20.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azca$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-ca$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-US(VA)")
             echo "CF_API=https://api.cf.us21.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azva$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-va$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-US(WA)")
             echo "CF_API=https://api.cf.us20.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azwa$RANDOM_STR" >> $GITHUB_ENV
+            echo="APP_NAME=az-wa$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-EU(Netherlands)")
             echo "CF_API=https://api.cf.eu20-001.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azeu$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-eu$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-JP(Tokyo)")
             echo "CF_API=https://api.cf.jp20.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azjp$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-jp$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Azure-SG(Singapore)")
             echo "CF_API=https://api.cf.ap21.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-azsg$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=az-sg$RANDOM_STR" >> $GITHUB_ENV
             ;;
           
           # SAP Neo 区域
           "Neo-UAE(Dubai)")
             echo "CF_API=https://api.cf.neo-ae1.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-neouae$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=neo-uae$RANDOM_STR" >> $GITHUB_ENV
             ;;
           "Neo-KSA(Riyadh)")
             echo "CF_API=https://api.cf.neo-sa1.hana.ondemand.com" >> $GITHUB_ENV
-            echo "APP_NAME=nezha-neoksa$RANDOM_STR" >> $GITHUB_ENV
+            echo "APP_NAME=neo-ksa$RANDOM_STR" >> $GITHUB_ENV
             ;;
         esac
         
-        # 如果用户提供了应用名称，则使用用户提供的
+        # 如果用户提供了应用名称，则使用用户提供
         if [ -n "${{ github.event.inputs.app_name }}" ]; then
           echo "APP_NAME=${{ github.event.inputs.app_name }}" >> $GITHUB_ENV
         fi
-
-        # 如果自定义了docker镜像变量则使用定义的，否则按照选择的
+        
+        # 如果自定义了docker镜像变量则使用定义的，否则使用默认镜像
         if [[ -n "${{ secrets.DOCKER_IMAGE }}" ]]; then
           echo "DOCKER_IMAGE=${{ secrets.DOCKER_IMAGE }}" >> $GITHUB_ENV
         else
-          if [ "${{ github.event.inputs.type }}" = "nezha-v0" ]; then
-            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
-          elif [ "${{ github.event.inputs.type }}" = "nezha-v1" ]; then
-            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
-          else 
-            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
-          fi
+          echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
         fi
+        
         echo "使用API端点: $CF_API"
         echo "应用名称: $APP_NAME"
-        echo "部署类型: ${{ env.DOCKER_IMAGE }}"
+        echo "部署类型: $DOCKER_IMAGE"
 
     - name: Login to Cloud Foundry
       run: |
@@ -241,71 +231,150 @@ jobs:
 
         # 获取组织列表
         ORG=$(cf orgs | sed -n '4p')
+        if [ -z "$ORG" ]; then
+          echo "❌ 未找到组织，请检查账号配置"
+          exit 1
+        fi
         echo "Selected org: $ORG"
         echo "ORG=$ORG" >> $GITHUB_ENV
 
         # 获取空间列表
         SPACE=$(cf spaces | sed -n '4p')
+        if [ -z "$SPACE" ]; then
+          echo "❌ 未找到空间，请检查账号配置"
+          exit 1
+        fi
         echo "Selected space: $SPACE"
         echo "SPACE=$SPACE" >> $GITHUB_ENV
 
         # 使用获取的组织和空间重新登录
-        cf login -a ${{ env.CF_API }} -u "${{ secrets.EMAIL }}" -p "${{ secrets.PASSWORD }}" -o "$ORG" -s "$SPACE"
-
+        cf login -a ${{ env.CF_API }} -u "${{ secrets.EMAIL }}" -p "${{ secrets.PASSWORD }}" -o "$ORG" -s "$SPACE" 
+     
     - name: Deploy application
+      timeout-minutes: 5
       run: |
-        if cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m ${{ env.MEMORY }} -k ${{ env.DISK }} --health-check-type port; then
-          echo "Deployment successful"
+        echo "📦 开始部署应用..."
+        if cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m 1024M -k 2048M -u process; then
+          echo "✅ 部署成功，稍后设置环境变量"
+          echo "DEPLOY_STATUS=success" >> $GITHUB_ENV
         else
-          cf delete ${{ env.APP_NAME }} -f -r
-          echo "伙计,没资源了,部署失败,请明天早上8:20至9:00再尝试部署,已清理失败部署残留"
-          exit 1
+          echo "⚠️ 部署失败，尝试重启"
+          echo "DEPLOY_STATUS=pending" >> $GITHUB_ENV
         fi
-        
-    - name: Verify deployment
+    
+    - name: Set environment variables
       run: |
-        # 设置环境变量
-        # fscarmen2环境变量，参考哪吒面板:https://github.com/fscarmen2/Argo-Nezha-Service-Container
-        # dsadsadsss环境变量，参考哪吒面板:https://github.com/dsadsadsss/Docker-for-Nezha-Argo-server-v1.x.git
+        echo "🔧 设置环境变量..."
+        # 环境变量，参考哪吒面板:https://github.com/dsadsadsss/Docker-for-Nezha-Argo-server-v1.x.git
         cf set-env ${{ env.APP_NAME }} NAME "nezha"
         cf set-env ${{ env.APP_NAME }} UUID "${{ secrets.UUID }}"
         cf set-env ${{ env.APP_NAME }} ARGO_DOMAIN "${{ secrets.ARGO_DOMAIN }}"
         cf set-env ${{ env.APP_NAME }} ARGO_AUTH "${{ secrets.ARGO_AUTH }}"
         cf set-env ${{ env.APP_NAME }} GH_CLIENTSECRET "${{ secrets.GH_CLIENTSECRET }}"
         cf set-env ${{ env.APP_NAME }} GH_CLIENTID "${{ secrets.GH_CLIENTID }}"
-        cf set-env ${{ env.APP_NAME }} DASH_TOKEN "${{ secrets.DASH_TOKEN }}"
         cf set-env ${{ env.APP_NAME }} API_TOKEN "${{ secrets.API_TOKEN }}"
+        cf set-env ${{ env.APP_NAME }} DASH_TOKEN "${{ secrets.DASH_TOKEN }}"
         cf set-env ${{ env.APP_NAME }} GH_REPO "${{ secrets.GH_REPO }}"
         cf set-env ${{ env.APP_NAME }} GH_EMAIL "${{ secrets.GH_EMAIL }}"
         cf set-env ${{ env.APP_NAME }} GH_PAT "${{ secrets.GH_PAT }}"
         cf set-env ${{ env.APP_NAME }} GH_USER "${{ secrets.GH_USER }}"
-        cf set-env ${{ env.APP_NAME }} PORT "80"
         
-        # 重启应用
-        cf restage ${{ env.APP_NAME }}
-        # 检查应用状态
-        STATUS=$(cf app ${{ env.APP_NAME }} | grep "requested state:" | awk '{print $3}')
-        if [ "$STATUS" = "started" ]; then
-          echo "✅ Nezha启动成功"
+        # 可选：从文件读取环境变量(如果存在)
+        if [ -f .env ]; then
+          echo "📄 发现 .env 文件，正在读取额外配置..."
+          while IFS= read -r line; do
+            # 跳过注释和空行
+            if [[ ! "$line" =~ ^# ]] && [[ -n "$line" ]]; then
+              IFS='=' read -r key value <<< "$line"
+              if [[ -n "$key" ]] && [[ -n "$value" ]]; then
+                echo "  设置: $key"
+                cf set-env ${{ env.APP_NAME }} "$key" "$value"
+              fi
+            fi
+          done < .env
+          echo "✅ .env 文件配置完成"
+        fi
+
+    - name: Restage application
+      timeout-minutes: 5
+      run: |
+        echo "🔄 重启应用以应用新配置..."
+        if cf restage ${{ env.APP_NAME }}; then
+          echo "✅ 应用重启成功"
+          echo "RESTAGE_STATUS=success" >> $GITHUB_ENV
         else
-          echo "❌ 应用启动失败，当前状态: $STATUS"
-          echo "查看应用日志:"
-          cf logs ${{ env.APP_NAME }} --recent
+          echo "❌ 应用重启失败"
+          echo "RESTAGE_STATUS=failed" >> $GITHUB_ENV
           exit 1
         fi
-        
-    - name: 详细部署信息
+
+    - name: Verify deployment
+      if: success()
       run: |
-        echo "🚀 部署完成！详细信息如下："
+        echo "🔍 验证部署状态..."
+        cf app ${{ env.APP_NAME }}
+        
+        # 检查应用状态
+        APP_STATUS=$(cf app ${{ env.APP_NAME }} | grep "^#0" | awk '{print $2}')
+        if [ "$APP_STATUS" = "running" ]; then
+          echo "✅ 应用运行正常"
+        else
+          echo "⚠️ 应用状态异常: $APP_STATUS"
+        fi
+
+    - name: Cleanup on failure
+      if: failure() && env.RESTAGE_STATUS == 'failed'
+      run: |
+        echo "🧹 检测到重启失败，开始清理..."
+        
+        # 检查应用是否存在
+        if cf app ${{ env.APP_NAME }} &> /dev/null; then
+          echo "📋 应用当前状态:"
+          cf app ${{ env.APP_NAME }}
+          
+          echo ""
+          echo "🗑️ 删除失败的应用实例..."
+          if cf delete ${{ env.APP_NAME }} -f; then
+            echo "✅ 应用已清理"
+          else
+            echo "⚠️ 清理失败，请手动检查"
+          fi
+        else
+          echo "ℹ️ 应用不存在，无需清理"
+        fi
+        
+        echo ""
+        echo "💡 建议："
+        echo "  1. 检查 GitHub Secrets 配置是否正确"
+        echo "  2. 检查 Docker 镜像是否可用"
+        echo "  3. 查看上方日志了解具体错误"
+        echo "  4. 修复问题后重新运行工作流"
+
+    - name: 详细部署信息
+      if: success()
+      run: |
+        echo "=========================================="
+        echo "🎉 部署完成！详细信息如下："
+        echo "=========================================="
         echo "区域(Region): ${{ github.event.inputs.region }}"
         echo "组织(ORG): ${{ env.ORG }}"
         echo "空间(SPACE): ${{ env.SPACE }}"
         echo "应用名称(App Name): ${{ env.APP_NAME }}"
+        echo "Docker镜像: ${{ env.DOCKER_IMAGE }}"
+        echo ""
 
         # 获取应用路由
         ROUTE=$(cf app ${{ env.APP_NAME }} | grep "routes:" | awk '{print $2}')
         if [ -n "$ROUTE" ]; then
-          echo "Nezha—URL: https://$ROUTE"
+          echo "=========================================="
+          echo "🌐 应用 URL: https://$ROUTE"
+          echo "=========================================="
+          echo ""
+          echo "📝 后续操作："
+          echo "  1. 访问上方 URL 检查应用运行状态"
+          echo "  2. 登录哪吒面板进行配置"
+          echo "  3. 如需更新，重新运行此工作流"
         else
-          echo "⚠️ 未找到应用路由，请检查部署状态。"
+          echo "⚠️ 未找到应用路由，请检查部署状态"
+          cf routes
         fi
