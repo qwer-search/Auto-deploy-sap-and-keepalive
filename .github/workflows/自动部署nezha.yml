@@ -10,8 +10,8 @@ on:
         type: choice
         options:
           - fscarmen
-          - dsadsadsss-v0
-          - dsadsadsss-v1
+          - nezha-v0
+          - nezha-v1
       region:
         description: '选择部署区域'
         required: true
