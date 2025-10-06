@@ -59,7 +59,7 @@ on:
         default: ''
 
 env:
-  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/kejiland/d-nezhav1:latest' }}
+  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/legendmeinan/nezhav1:latest' }}
   MEMORY: ${{ secrets.MEMORY || '512M' }}
   DISK: ${{ secrets.DISK || '1024M' }}
 
@@ -224,11 +224,11 @@ jobs:
           echo "DOCKER_IMAGE=${{ secrets.DOCKER_IMAGE }}" >> $GITHUB_ENV
         else
           if [ "${{ github.event.inputs.type }}" = "nezha-v0" ]; then
-            echo "DOCKER_IMAGE=ghcr.io/kejiland/d-nezhav1:latest" >> $GITHUB_ENV
+            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
           elif [ "${{ github.event.inputs.type }}" = "nezha-v1" ]; then
-            echo "DOCKER_IMAGE=ghcr.io/kejiland/d-nezhav1:latest" >> $GITHUB_ENV
+            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
           else 
-            echo "DOCKER_IMAGE=ghcr.io/kejiland/d-nezhav1:latest" >> $GITHUB_ENV
+            echo "DOCKER_IMAGE=ghcr.io/legendmeinan/nezhav1:latest" >> $GITHUB_ENV
           fi
         fi
         echo "使用API端点: $CF_API"
