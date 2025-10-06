@@ -9,8 +9,8 @@ on:
         default: 'fscarmen'
         type: choice
         options:
-          - fscarmen
           - nezha-v0
+          - fscarmen
           - nezha-v1
       region:
         description: '选择部署区域'
