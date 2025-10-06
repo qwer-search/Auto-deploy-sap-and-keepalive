@@ -10,8 +10,8 @@ on:
         type: choice
         options:
           - nezha-v0
-          - fscarmen
           - nezha-v1
+          - fscarmen
       region:
         description: '选择部署区域'
         required: true
@@ -59,7 +59,7 @@ on:
         default: ''
 
 env:
-  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/kejiland/f-nezha:latest' }}
+  DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE || 'ghcr.io/kejiland/d-nezhav1:latest' }}
   MEMORY: ${{ secrets.MEMORY || '512M' }}
   DISK: ${{ secrets.DISK || '1024M' }}
 
