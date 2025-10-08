@@ -11,6 +11,7 @@ on:
         options:
           - Lunatv
           - Moontv
+          - DecoTV
           - KatelyaTV
       region:
         description: '选择部署区域'
@@ -227,6 +228,8 @@ jobs:
             echo "DOCKER_IMAGE=ghcr.io/moontechlab/lunatv:latest" >> $GITHUB_ENV
           elif [ "${{ github.event.inputs.type }}" = "KatelyaTV" ]; then
             echo "DOCKER_IMAGE=ghcr.io/katelya77/katelyatv:latest" >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.type }}" = "DecoTV" ]; then
+            echo "DOCKER_IMAGE=ghcr.io/decohererk/decotv:latest" >> $GITHUB_ENV
           else 
             echo "DOCKER_IMAGE=ghcr.io/eooce/moontv:latest" >> $GITHUB_ENV
           fi

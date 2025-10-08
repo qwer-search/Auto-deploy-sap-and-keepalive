@@ -3,7 +3,7 @@
 ## 概述
 
 本项目是自动部署argo隧道或直连节点到SAP Cloud平台，试用版提供完美的自动保活的方案,并适配企业版部署，企业版无需保活
-- 视频教程：https://www.youtube.com/watch?v=uHvtVaeVCvE
+- 视频教程：https://www.youtube.com/watch?v=MU_ySjg98F8
 - telegram交流反馈群组：https://t.me/eooceu
 
 ### 前置要求
@@ -17,8 +17,8 @@
 2. 在Actions菜单允许 `I understand my workflows, go ahead and enable them` 按钮
 
 3. 在 GitHub 仓库中设置以下 secrets（Settings → Secrets and variables → Actions → New repository secret）：
-- `EMAIL`: Cloud Foundry账户邮箱(必填)
-- `PASSWORD`: Cloud Foundry账户密码(必填)
+- `EMAIL`: SAP(试用版或企业版)登录邮箱(必填)
+- `PASSWORD`: SAP(试用版或企业版)登录密码(必填)
 
 4. **设置Docker容器环境变量(也是在secrets里设置)**
    - 使用固定隧道token部署，请在cloudflare里设置端口为8001
